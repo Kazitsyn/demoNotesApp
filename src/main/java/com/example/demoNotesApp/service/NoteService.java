@@ -3,6 +3,8 @@ package com.example.demoNotesApp.service;
 import com.example.demoNotesApp.model.Note;
 import com.example.demoNotesApp.repository.NoteRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +20,8 @@ public class NoteService {
         return note;
     }
 
-    public List<Note> findAll(){
-        return noteRepository.findAll();
+    public List<Note> findAll(int limit){
+        return noteRepository.findAll(PageRequest.of(0, limit, Sort.by("localDateTime").descending())).getContent();
     }
 
     public Optional<Note> findById(Long id){

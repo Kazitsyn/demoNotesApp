@@ -15,8 +15,8 @@ public class Controller {
     private NoteService noteService;
 
     @GetMapping("/")
-    public ResponseEntity<List> findAll(Note note){
-        List<Note> notes = noteService.findAll();
+    public ResponseEntity<List> findAll(@RequestParam(required = false, defaultValue = "10") int limit){
+        List<Note> notes = noteService.findAll(limit);
         return ResponseEntity.ok(notes);
     }
 
